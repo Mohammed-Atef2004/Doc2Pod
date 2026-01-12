@@ -1,50 +1,210 @@
+/* ============================= */
+/* 1. UPLOAD LAYOUT */
+/* ============================= */
+
 .upload-wrapper {
   display: flex;
   justify-content: center;
-  padding-top: 60px;
+  align-items: center;
+  min-height: 90vh;
+  padding: 60px 20px;
+  background: radial-gradient(circle at top, #0a0a0f, #000);
 }
 
-.upload-container { width: 100%; max-width: 600px; text-align: center; }
+.upload-container {
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
+  backdrop-filter: blur(25px);
+  padding: 50px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.7),
+    inset 0 0 40px rgba(251,191,36,0.05);
+  position: relative;
+  overflow: hidden;
+}
 
-.subtitle { color: var(--text-secondary); margin-bottom: 30px; }
+/* Animated Gold Border */
+.upload-container::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 32px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(251,191,36,0.4),
+    transparent
+  );
+  opacity: 0.4;
+  animation: borderGlow 6s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================= */
+/* 2. HEADINGS */
+/* ============================= */
+
+.upload-container h2 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: rgba(255,255,255,0.6);
+  font-size: 1.1rem;
+  margin-bottom: 45px;
+}
+
+/* ============================= */
+/* 3. DROP ZONE */
+/* ============================= */
 
 .drop-zone {
-  border: 2px dashed var(--border-muted);
-  border-radius: 16px;
-  padding: 50px 20px;
+  border: 2px dashed rgba(251,191,36,0.35);
+  border-radius: 26px;
+  padding: 70px 30px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: rgba(255,255,255,0.02);
+  transition: all 0.5s ease;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.01)
+    );
+  position: relative;
+  overflow: hidden;
+}
+
+.drop-zone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(251,191,36,0.15),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: 0.6s;
+}
+
+.drop-zone:hover::after {
+  transform: translateX(100%);
 }
 
 .drop-zone:hover {
   border-color: var(--accent-gold);
-  background: rgba(251, 191, 36, 0.05);
+  transform: translateY(-8px);
+  box-shadow:
+    0 25px 60px rgba(251,191,36,0.25),
+    inset 0 0 40px rgba(251,191,36,0.08);
 }
 
-.drop-zone span { color: var(--accent-gold); text-decoration: underline; }
+.upload-icon {
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 15px rgba(251,191,36,0.6));
+}
 
-.config-row { margin: 25px 0; text-align: left; }
+.drop-zone p {
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.drop-zone span {
+  color: var(--accent-gold);
+  font-weight: 800;
+  border-bottom: 2px solid transparent;
+}
+
+.drop-zone:hover span {
+  border-bottom-color: var(--accent-gold);
+}
+
+/* ============================= */
+/* 4. CONFIG */
+/* ============================= */
+
+.config-row {
+  margin: 40px 0;
+  text-align: left;
+}
+
+.config-row label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
 
 select {
   width: 100%;
-  padding: 12px;
-  background: var(--bg-deep);
-  border: 1px solid var(--border-muted);
-  color: white;
-  border-radius: 10px;
-  margin-top: 8px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  color: #fff;
+  font-size: 1rem;
+  appearance: none;
+  cursor: pointer;
+  transition: 0.4s;
 }
+
+select:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(251,191,36,0.4);
+}
+
+/* ============================= */
+/* 5. CTA BUTTON */
+/* ============================= */
 
 .btn-primary-fakhma {
   width: 100%;
-  padding: 15px;
-  background: var(--accent-gold);
-  color: var(--bg-deep);
+  padding: 22px;
+  border-radius: 18px;
   border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background:
+    linear-gradient(
+      135deg,
+      #fbbf24,
+      #f59e0b
+    );
+  color: #000;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
+  transition: all 0.4s ease;
+  box-shadow:
+    0 25px 60px rgba(251,191,36,0.45);
+}
+
+.btn-primary-fakhma:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 35px 80px rgba(251,191,36,0.6);
+}
+
+.btn-primary-fakhma:active {
+  transform: scale(0.97);
 }
