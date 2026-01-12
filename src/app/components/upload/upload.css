@@ -1,0 +1,50 @@
+.upload-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+.upload-container { width: 100%; max-width: 600px; text-align: center; }
+
+.subtitle { color: var(--text-secondary); margin-bottom: 30px; }
+
+.drop-zone {
+  border: 2px dashed var(--border-muted);
+  border-radius: 16px;
+  padding: 50px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.02);
+}
+
+.drop-zone:hover {
+  border-color: var(--accent-gold);
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.drop-zone span { color: var(--accent-gold); text-decoration: underline; }
+
+.config-row { margin: 25px 0; text-align: left; }
+
+select {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-muted);
+  color: white;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.btn-primary-fakhma {
+  width: 100%;
+  padding: 15px;
+  background: var(--accent-gold);
+  color: var(--bg-deep);
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
+}

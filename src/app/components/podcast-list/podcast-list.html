@@ -1,0 +1,82 @@
+<div class="library-wrapper">
+  <div class="library-header">
+    <div class="title-section">
+      <span class="subtitle">Personal Collection</span>
+      <h2>Your Podcast Library</h2>
+    </div>
+    <button routerLink="/upload" class="btn-add">
+      <span class="plus-icon">+</span> New Podcast
+    </button>
+  </div>
+
+  <div class="podcast-grid">
+    <div class="podcast-card-premium" routerLink="/display">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="card-top">
+          <span class="date">Jan 12, 2026</span>
+          <span class="tag">Egyptian Dialect</span>
+        </div>
+        <div class="card-body">
+          <div class="mic-icon-mini">🎙️</div>
+          <div class="text">
+            <h3>Physics - Quantum Mechanics</h3>
+            <p>A summary of the first 3 chapters explained simply.</p>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-play-premium">▶ Play Now</button>
+          <button class="btn-icon-only" (click)="$event.stopPropagation()">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm9 4H3v-2h18v2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="podcast-card-premium" routerLink="/display">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="card-top">
+          <span class="date">Jan 10, 2026</span>
+          <span class="tag">Standard Arabic</span>
+        </div>
+        <div class="card-body">
+          <div class="mic-icon-mini">🧬</div>
+          <div class="text">
+            <h3>Cell Biology Fundamentals</h3>
+            <p>Deep dive into cellular structures and functions.</p>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-play-premium">▶ Play Now</button>
+          <button class="btn-icon-only" (click)="$event.stopPropagation()">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm9 4H3v-2h18v2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="podcast-card-premium" routerLink="/display">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="card-top">
+          <span class="date">Jan 08, 2026</span>
+          <span class="tag">Egyptian Dialect</span>
+        </div>
+        <div class="card-body">
+          <div class="mic-icon-mini">🏛️</div>
+          <div class="text">
+            <h3>Ancient Egyptian Secrets</h3>
+            <p>Exploring the hidden gems of the Pharaonic era.</p>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-play-premium">▶ Play Now</button>
+          <button class="btn-icon-only" (click)="$event.stopPropagation()">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm9 4H3v-2h18v2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

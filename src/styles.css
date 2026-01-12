@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-deep: #0a0c10;       /* أسود مطفي عميق جداً */
+  --bg-surface: #161b22;    /* رمادي غامق للفورم والكروت */
+  --accent-gold: #fbbf24;   /* ذهبي هادي للزراير */
+  --text-primary: #f0f6fc;  /* أبيض مريح للعين (Off-white) */
+  --text-secondary: #8b949e;/* رمادي للنصوص الجانبية */
+  --border-muted: #30363d;  /* حدود خفيفة جداً */
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* الكروت الفخمة */
+.glass-card, .auth-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-muted) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  padding: 40px !important;
+  backdrop-filter: none !important;
+}
