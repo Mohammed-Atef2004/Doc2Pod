@@ -1,33 +1,99 @@
 <div class="upload-wrapper">
   <div class="upload-container">
-    
+
     <h2>Transform PDF to Podcast</h2>
     <p class="subtitle">Turn documents into cinematic AI narration</p>
 
-    <div class="drop-zone" (click)="fileInput.click()">
-      <input type="file" #fileInput hidden accept=".pdf">
+    <!-- Drop Zone -->
+    <div class="drop-zone"
+         (click)="!isProcessing && fileInput.click()"
+         (drop)="onDrop($event)"
+         (dragover)="onDragOver($event)"
+         [class.has-file]="selectedFile"
+         [class.disabled]="isProcessing">
+
+      <input type="file" #fileInput hidden accept=".pdf" (change)="onFileSelected($event)">
 
       <div class="upload-icon">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <path d="M17 8l-5-5-5 5"/>
           <path d="M12 3v12"/>
         </svg>
       </div>
 
-      <p>Drop your PDF here or <span>browse files</span></p>
+      <p *ngIf="!selectedFile">Drop your PDF here or <span>browse files</span></p>
+      <div class="file-info" *ngIf="selectedFile">
+        <p class="file-name">📄 {{ selectedFile.name }}</p>
+        <small class="file-size">{{ (selectedFile.size / 1024 / 1024) | number:'1.1-2' }} MB</small>
+      </div>
     </div>
 
-    <div class="config-row">
-      <label>Voice Tone</label>
-      <select>
-        <option>🎙 Friendly Egyptian</option>
-        <option>🎧 Professional Studio</option>
-      </select>
+    <!-- Config Fields — بيظهروا بس بعد ما يختار PDF -->
+    <div class="config-section" *ngIf="selectedFile && !isProcessing">
+
+      <div class="config-row">
+        <label>Voice Tone</label>
+        <select [(ngModel)]="selectedVoice">
+          <option value="Friendly Egyptian">🎙 Friendly Egyptian</option>
+          <option value="Professional Studio">🎧 Professional Studio</option>
+        </select>
+      </div>
+
+      <div class="config-row">
+        <label>Generation Mode</label>
+        <select [(ngModel)]="selectedMode">
+          <option [value]="1">Mode 1 — Topic Focus</option>
+          <option [value]="2">Mode 2 — Topic + Page Range</option>
+          <option [value]="3">Mode 3 — Full Document</option>
+        </select>
+      </div>
+
+      <!-- Topic -->
+      <div class="config-row" *ngIf="selectedMode == 1 || selectedMode == 2">
+        <label>Topic</label>
+        <input class="text-input" type="text" [(ngModel)]="topic" placeholder="e.g. What is Active Attacks" />
+      </div>
+
+      <!-- Pages -->
+      <div class="pages-row" *ngIf="selectedMode == 2">
+        <div class="config-row">
+          <label>Start Page</label>
+          <input class="text-input" type="number" [(ngModel)]="startPage" placeholder="e.g. 10" />
+        </div>
+        <div class="config-row">
+          <label>End Page</label>
+          <input class="text-input" type="number" [(ngModel)]="endPage" placeholder="e.g. 17" />
+        </div>
+      </div>
+
+      <!-- Mode 3 hint -->
+      <div class="mode3-hint" *ngIf="selectedMode == 3">
+        <p>🎙 Full document will be processed automatically — no extra input needed.</p>
+      </div>
+
     </div>
 
-    <button class="btn-primary-fakhma">
-      Generate Podcast ✨
+    <!-- Progress — بيظهر أثناء الـ processing -->
+    <div class="progress-section" *ngIf="isProcessing">
+      <div class="progress-status">
+        <span *ngIf="progressStep === 'uploading'">📤 Uploading your document...</span>
+        <span *ngIf="progressStep === 'generating'">🎙 Sending to AI for generation...</span>
+        <span *ngIf="progressStep === 'done'">✅ Done!</span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" [style.width.%]="uploadProgress"></div>
+      </div>
+      <small class="progress-percent">{{ uploadProgress }}%</small>
+    </div>
+
+    <!-- Generate Button -->
+    <button
+      class="btn-primary-fakhma"
+      (click)="startTransformation()"
+      [disabled]="isProcessing || !selectedFile">
+      <span *ngIf="!isProcessing">Generate Podcast ✨</span>
+      <span *ngIf="isProcessing">Processing... ⏳</span>
     </button>
 
   </div>

@@ -7,21 +7,36 @@
             <div class="brand-badge">Premium AI Studio</div>
             <h2>Create Account</h2>
             <p>Join <span class="gold-text">Doc2Pod</span> and start converting documents to masterpieces</p>
-            
-            <div class="podcast-icons">
-                <i class="fas fa-file-alt"></i>
-                <i class="fas fa-wave-square"></i>
-                <i class="fas fa-microphone-alt"></i>
-                <i class="fas fa-headphones"></i>
-            </div>
         </div>
         
-        <form class="auth-form">
+        <form class="auth-form" (ngSubmit)="onSubmit()">
+            
+            <div *ngIf="errorMessage" class="error-msg" style="color: #ff4d4d; background: rgba(255,77,77,0.1); padding: 10px; border-radius: 8px; margin-bottom: 1rem; text-align: center; border: 1px solid #ff4d4d;">
+                {{ errorMessage }}
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <div class="input-group" style="flex: 1;">
+                    <label>First Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" name="firstName" [(ngModel)]="registerData.firstName" placeholder="First Name" required>
+                    </div>
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label>Last Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" name="lastName" [(ngModel)]="registerData.lastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+            </div>
+
             <div class="input-group">
-                <label>Full Name</label>
+                <label>Username</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-user input-icon"></i>
-                    <input type="text" placeholder="Enter your full name" required>
+                    <i class="fas fa-at input-icon"></i>
+                    <input type="text" name="username" [(ngModel)]="registerData.username" placeholder="Choose a unique username" required>
                 </div>
             </div>
 
@@ -29,7 +44,7 @@
                 <label>Email Address</label>
                 <div class="input-wrapper">
                     <i class="fas fa-envelope input-icon"></i>
-                    <input type="email" placeholder="email@example.com" required>
+                    <input type="email" name="email" [(ngModel)]="registerData.email" placeholder="email@example.com" required>
                 </div>
             </div>
 
@@ -37,30 +52,18 @@
                 <label>Password</label>
                 <div class="input-wrapper">
                     <i class="fas fa-lock input-icon"></i>
-                    <input type="password" placeholder="Create a strong password" required>
-                    <span class="password-toggle"><i class="fas fa-eye"></i></span>
+                    <input type="password" name="password" [(ngModel)]="registerData.password" placeholder="Create a strong password" required>
                 </div>
             </div>
 
-            
-
-           
-
-            <button type="submit" class="btn-gold-premium">
-                <span>Join Now</span>
-                <i class="fas fa-arrow-right"></i>
+            <button type="submit" class="btn-gold-premium" [disabled]="isLoading">
+                <span>{{ isLoading ? 'Creating Account... ⏳' : 'Join Now' }}</span>
+                <i *ngIf="!isLoading" class="fas fa-arrow-right"></i>
             </button>
         </form>
-
-        <div class="divider"><span>Or continue with</span></div>
-        <div class="social-login">
-            <button class="social-btn google"><i class="fab fa-google"></i> Google</button>
-            <button class="social-btn apple"><i class="fab fa-github"></i> GitHub</button>
-        </div>
 
         <div class="auth-footer">
             <p>Already have an account? <a routerLink="/login" class="link-gold">Log in here</a></p>
         </div>
     </div>
 </div>
-

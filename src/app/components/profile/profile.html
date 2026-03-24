@@ -1,12 +1,14 @@
-<div class="profile-wrapper">
+<div class="profile-wrapper" *ngIf="!isLoading && userData">
   <div class="profile-container">
     <div class="profile-header-premium">
       <div class="avatar-wrapper">
         <div class="avatar-glow"></div>
-        <div class="avatar-main">JD</div>
+        <div class="avatar-main">
+          {{ userData.firstName?.[0] }}{{ userData.lastName?.[0] }}
+        </div>
       </div>
       <div class="user-meta">
-        <h1>John Doe</h1>
+        <h1>{{ userData.firstName }} {{ userData.lastName }}</h1>
         <p class="status-badge">Premium Account</p>
       </div>
     </div>
@@ -14,26 +16,30 @@
     <div class="profile-grid">
       <div class="info-card-fakhma">
         <label>Email Address</label>
-        <p>john.doe@example.com</p>
+        <p>{{ userData.email }}</p>
         <div class="card-icon">✉️</div>
       </div>
 
       <div class="info-card-fakhma">
-        <label>Total Generated Content</label>
-        <p>12 Podcasts</p>
+        <label>Username</label>
+        <p>@{{ userData.username }}</p>
         <div class="card-icon">🎙️</div>
       </div>
 
       <div class="info-card-fakhma">
-        <label>Member Since</label>
-        <p>January 2026</p>
+        <label>Account Status</label>
+        <p>Active User</p>
         <div class="card-icon">🗓️</div>
       </div>
     </div>
 
     <div class="profile-footer">
       <button class="btn-edit">Edit Settings</button>
-      <button class="btn-logout-premium">Sign Out</button>
+      <button class="btn-logout-premium" (click)='onLogout()'>Sign Out</button>
     </div>
   </div>
+</div>
+
+<div *ngIf="isLoading" style="text-align: center; margin-top: 50px; color: #fbbf24;">
+  <h3>Loading your profile... ✨</h3>
 </div>

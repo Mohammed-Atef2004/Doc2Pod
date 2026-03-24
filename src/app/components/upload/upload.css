@@ -208,3 +208,54 @@ select:focus {
 .btn-primary-fakhma:active {
   transform: scale(0.97);
 }
+.text-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.text-input:focus {
+  border-color: #fbbf24;
+}
+
+.pages-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.pages-row .config-row {
+  flex: 1;
+}
+
+.mode3-hint {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.back-pill {
+  background: transparent;
+  border: 1px solid #444;
+  color: #aaa;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.back-pill:hover {
+  border-color: #fbbf24;
+  color: #fbbf24;
+}
