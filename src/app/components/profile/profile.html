@@ -1,20 +1,34 @@
 <div class="profile-wrapper" *ngIf="!isLoading && userData">
   <div class="profile-container">
+    
     <div class="profile-header-premium">
       <div class="avatar-wrapper">
         <div class="avatar-glow"></div>
         <div class="avatar-main">
-          {{ userData.firstName?.[0] }}{{ userData.lastName?.[0] }}
+          {{ userData.firstname?.[0]?.toUpperCase() }}{{ userData.lastname?.[0]?.toUpperCase() }}
         </div>
       </div>
       <div class="user-meta">
-        <h1>{{ userData.firstName }} {{ userData.lastName }}</h1>
-        <p class="status-badge">Premium Account</p>
+        <h1>{{ userData.firstname }} {{ userData.lastname }}</h1>
+        <p class="status-badge">{{ userData.role }} Account</p>
       </div>
     </div>
 
     <div class="profile-grid">
+      
       <div class="info-card-fakhma">
+        <label>First Name</label>
+        <p>{{ userData.firstname }}</p>
+        <div class="card-icon">👤</div>
+      </div>
+
+      <div class="info-card-fakhma">
+        <label>Last Name</label>
+        <p>{{ userData.lastname }}</p>
+        <div class="card-icon">👤</div>
+      </div>
+
+      <div class="info-card-fakhma full-width">
         <label>Email Address</label>
         <p>{{ userData.email }}</p>
         <div class="card-icon">✉️</div>
@@ -27,19 +41,27 @@
       </div>
 
       <div class="info-card-fakhma">
+        <label>Phone Number</label>
+        <p>{{ userData.phoneNumber || 'Not Linked' }}</p>
+        <div class="card-icon">📞</div>
+      </div>
+
+      <div class="info-card-fakhma">
         <label>Account Status</label>
-        <p>Active User</p>
+        <p>{{ userData.isActive ? 'Verified Active' : 'Inactive' }}</p>
+        <div class="card-icon">🛡️</div>
+      </div>
+
+      <div class="info-card-fakhma">
+        <label>Last Activity</label>
+        <p>{{ userData.lastLogin | date:'medium' }}</p>
         <div class="card-icon">🗓️</div>
       </div>
     </div>
 
     <div class="profile-footer">
-      <button class="btn-edit">Edit Settings</button>
-      <button class="btn-logout-premium" (click)='onLogout()'>Sign Out</button>
+      <button class="btn-edit">Edit Personal Info</button>
+      <button class="btn-logout-premium" (click)="onLogout()">Sign Out</button>
     </div>
   </div>
-</div>
-
-<div *ngIf="isLoading" style="text-align: center; margin-top: 50px; color: #fbbf24;">
-  <h3>Loading your profile... ✨</h3>
 </div>

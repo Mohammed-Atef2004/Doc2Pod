@@ -11,12 +11,13 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   // Helper method to include the JWT token in the headers
-  private getHeaders() {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-  }
+  private getHeaders(): HttpHeaders {
+  const token = localStorage.getItem('token') || ''; // لو مفيش توكن يبعت سترينج فاضي بدل null
+  return new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+}
 
   // =========================
   // Authentication
@@ -31,7 +32,6 @@ export class ApiService {
   }
 
   logout(data: any) {
-    // Some logouts require the token to invalidate it on the server
     return this.http.post(`${this.baseUrl}/authentication/logout`, data, { headers: this.getHeaders() });
   }
 
@@ -51,12 +51,12 @@ export class ApiService {
   // Documents
   // =========================
 
- uploadDocument(formData: FormData) {
-  return this.http.post(`${this.baseUrl}/documents/upload`, formData, {
-    headers: this.getHeaders(),
-    responseType: 'text'
-  });
-}
+  uploadDocument(formData: FormData) {
+    return this.http.post(`${this.baseUrl}/documents/upload`, formData, {
+      headers: this.getHeaders(),
+      responseType: 'text'
+    });
+  }
 
   // =========================
   // Podcast
@@ -77,9 +77,10 @@ export class ApiService {
   // Profile
   // =========================
 
-  // NEW: Added this to fetch current user data for the profile page
+  // ✅ UPDATED: بتاخد الـ userId من localStorage وتحطه في الـ URL
   getUserProfile() {
-    return this.http.get(`${this.baseUrl}/profile/me`, { headers: this.getHeaders() });
+    const userId = localStorage.getItem('userId');
+    return this.http.get(`${this.baseUrl}/profile`, { headers: this.getHeaders() });
   }
 
   changeName(data: any) {

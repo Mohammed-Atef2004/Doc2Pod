@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
-import { ApiService } from '../../services/api'; // Correct path based on your folders
+import { ApiService } from '../../services/api';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -12,7 +12,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.css',
 })
 export class LoginComponent {
-  // Login credentials
   loginData = {
     email: '',
     password: ''
@@ -23,7 +22,6 @@ export class LoginComponent {
 
   constructor(private apiService: ApiService, private router: Router) {}
 
-  // Handles the login process
   onLogin(): void {
     if (!this.loginData.email || !this.loginData.password) {
       this.errorMessage = 'Email and password are required.';
@@ -33,27 +31,30 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    console.log('Attempting login for:', this.loginData.email);
-
     this.apiService.login(this.loginData).subscribe({
       next: (response: any) => {
         this.isLoading = false;
         console.log('Login Success! Response:', response);
 
-        // Save token if exists (Check your backend response property name)
-        const token = response.token || response.accessToken;
+        // ✅ الـ token والـ userId جوه response.value
+        const token = response.value?.token;
+        const userId = response.value?.userId;
+
         if (token) {
           localStorage.setItem('token', token);
         }
 
-        // Navigate to the profile page as requested
+        // ✅ بنحفظ الـ userId عشان نبعته في endpoint بتاع الـ profile
+        if (userId) {
+          localStorage.setItem('userId', userId);
+        }
+
         this.router.navigate(['/profile']);
       },
       error: (err) => {
         this.isLoading = false;
         console.error('Login Failed!', err);
 
-        // Displaying error from backend or generic message
         if (err.status === 401) {
           this.errorMessage = 'Invalid email or password.';
         } else if (err.status === 0) {
