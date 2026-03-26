@@ -30,7 +30,7 @@
     </div>
 
     <!-- Config Fields — بيظهروا بس بعد ما يختار PDF -->
-    <div class="config-section" *ngIf="selectedFile && !isProcessing">
+    <div class="config-section" *ngIf="selectedFile ">
 
       <div class="config-row">
         <label>Voice Tone</label>
@@ -52,18 +52,18 @@
       <!-- Topic -->
       <div class="config-row" *ngIf="selectedMode == 1 || selectedMode == 2">
         <label>Topic</label>
-        <input class="text-input" type="text" [(ngModel)]="topic" placeholder="e.g. What is Active Attacks" />
+        <input class="text-input" type="text" [(ngModel)]="topic" name="topic" placeholder="e.g. What is Active Attacks" />
       </div>
 
       <!-- Pages -->
       <div class="pages-row" *ngIf="selectedMode == 2">
         <div class="config-row">
           <label>Start Page</label>
-          <input class="text-input" type="number" [(ngModel)]="startPage" placeholder="e.g. 10" />
+          <input class="text-input" type="number" [(ngModel)]="startPage" name="startPage" placeholder="e.g. 10" />
         </div>
         <div class="config-row">
           <label>End Page</label>
-          <input class="text-input" type="number" [(ngModel)]="endPage" placeholder="e.g. 17" />
+          <input class="text-input" type="number" [(ngModel)]="endPage" name="endPage" placeholder="e.g. 17" />
         </div>
       </div>
 

@@ -53,8 +53,7 @@ export class ApiService {
 
   uploadDocument(formData: FormData) {
     return this.http.post(`${this.baseUrl}/documents/upload`, formData, {
-      headers: this.getHeaders(),
-      responseType: 'text'
+      headers: this.getHeaders()
     });
   }
 
