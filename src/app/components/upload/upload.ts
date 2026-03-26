@@ -32,29 +32,33 @@ export class UploadComponent {
     if (file && file.type === 'application/pdf') {
       this.selectedFile = file;
     } else {
-      Swal.fire({ icon: 'error', title: 'Invalid File', text: 'Please select a valid PDF.', confirmButtonColor: '#fbbf24' });
+      this.showSwal('error', 'Invalid File', 'Please select a valid PDF.');
     }
   }
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
     const file = event.dataTransfer?.files[0];
-    if (file && file.type === 'application/pdf') this.selectedFile = file;
+    if (file && file.type === 'application/pdf') {
+      this.selectedFile = file;
+    }
   }
 
-  onDragOver(event: DragEvent): void { event.preventDefault(); }
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
 
-  // زرار واحد بيعمل كل حاجة
   startTransformation(): void {
     if (!this.selectedFile) return;
 
-    // Validate قبل ما نبدأ
-    if (this.selectedMode === 1 && !this.topic.trim()) {
-      Swal.fire({ icon: 'warning', title: 'Missing Topic', text: 'Please enter a topic for Mode 1.', confirmButtonColor: '#fbbf24' });
+    const mode = Number(this.selectedMode);
+
+    if (mode === 1 && !this.topic.trim()) {
+      this.showSwal('warning', 'Missing Topic', 'Please enter a topic for Mode 1.');
       return;
     }
-    if (this.selectedMode === 2 && (!this.topic.trim() || !this.startPage || !this.endPage)) {
-      Swal.fire({ icon: 'warning', title: 'Missing Fields', text: 'Please fill topic, start page, and end page.', confirmButtonColor: '#fbbf24' });
+    if (mode === 2 && (!this.topic.trim() || !this.startPage || !this.endPage)) {
+      this.showSwal('warning', 'Missing Fields', 'Please fill topic, start page, and end page.');
       return;
     }
 
@@ -63,63 +67,79 @@ export class UploadComponent {
     this.uploadProgress = 15;
 
     const formData = new FormData();
-    formData.append('file', this.selectedFile, this.selectedFile.name);
+    formData.append('File', this.selectedFile, this.selectedFile.name);
 
-    // Step 1: Upload
     this.apiService.uploadDocument(formData).subscribe({
       next: (documentId: any) => {
         this.uploadProgress = 50;
         this.progressStep = 'generating';
-        console.log('Document ID:', documentId);
 
-        // Step 2: Build generation object
+
         let generationData: any = {
-          documentId: documentId as string,
-          mode: this.selectedMode
+          documentId: documentId.toString(),
+          mode: mode
         };
 
-        if (this.selectedMode === 1) {
-          generationData['topic'] = this.topic.trim();
-        }
-        if (this.selectedMode === 2) {
-          generationData['topic'] = this.topic.trim();
-          generationData['startPage'] = parseInt(this.startPage);
-          generationData['endPage'] = parseInt(this.endPage);
+        if (mode === 1 || mode === 2) {
+          generationData.topic = this.topic.trim();
         }
 
-        console.log('Generation Payload:', generationData);
+        if (mode === 2) {
+          generationData.startPage = parseInt(this.startPage);
+          generationData.endPage = parseInt(this.endPage);
+        }
 
-        // Step 2: Generate
+        console.log("Final Payload being sent to API:", generationData);
+
+
         this.apiService.generatePodcast(generationData).subscribe({
           next: () => {
-            this.uploadProgress = 100;
-            this.progressStep = 'done';
-            this.isProcessing = false;
-
-            Swal.fire({
-              icon: 'success',
-              title: 'Podcast is Being Generated!',
-              text: 'Redirecting to Library...',
-              confirmButtonColor: '#fbbf24',
-              timer: 3000,
-              timerProgressBar: true
-            }).then(() => this.router.navigate(['/podcast-list']));
+            this.handleSuccess();
           },
           error: (err) => {
-            this.isProcessing = false;
-            this.progressStep = 'idle';
-            console.error('Generation Error:', err);
-            Swal.fire({ icon: 'warning', title: 'Generation Delayed', text: 'Document uploaded but AI service is busy.', confirmButtonColor: '#fbbf24' });
+            this.handleError('Generation Failed', err);
           }
         });
       },
       error: (err) => {
-        this.isProcessing = false;
-        this.progressStep = 'idle';
-        this.uploadProgress = 0;
-        console.error('Upload Error:', err);
-        Swal.fire({ icon: 'error', title: 'Upload Failed', text: 'Please try again.', footer: `HTTP ${err.status}`, confirmButtonColor: '#fbbf24' });
+        this.handleError('Upload Failed', err);
       }
     });
+  }
+
+  private handleSuccess(): void {
+    this.uploadProgress = 100;
+    this.progressStep = 'done';
+    this.isProcessing = false;
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Podcast is Being Generated!',
+      text: 'Redirecting to Library...',
+      confirmButtonColor: '#fbbf24',
+      timer: 3000,
+      timerProgressBar: true
+    }).then(() => this.router.navigate(['/podcast-list']));
+  }
+
+  private handleError(title: string, err: any): void {
+    this.isProcessing = false;
+    this.progressStep = 'idle';
+    this.uploadProgress = 0;
+    console.error(`${title}:`, err);
+    
+    const errorMsg = err.error?.errors ? JSON.stringify(err.error.errors) : 'Please try again.';
+    
+    Swal.fire({
+      icon: 'error',
+      title: title,
+      text: errorMsg,
+      footer: `Status: ${err.status}`,
+      confirmButtonColor: '#fbbf24'
+    });
+  }
+
+  private showSwal(icon: any, title: string, text: string): void {
+    Swal.fire({ icon, title, text, confirmButtonColor: '#fbbf24' });
   }
 }
