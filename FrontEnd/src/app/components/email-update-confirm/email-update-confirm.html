@@ -1,0 +1,21 @@
+<div class="confirm-container">
+  <div class="confirm-card">
+    <div class="icon-wrapper">
+      <div *ngIf="isLoading" class="loader"></div>
+      <span *ngIf="isSuccess" class="success-icon">✔</span>
+      <span *ngIf="isError" class="error-icon">✖</span>
+    </div>
+
+    <h1 class="status-title">{{ message }}</h1>
+    
+    <p class="status-subtitle" *ngIf="isLoading">
+      Finalizing your security updates...
+    </p>
+
+    <div class="action-area" *ngIf="!isLoading">
+      <button class="btn-gold-action" (click)="goToLogin()">
+        {{ isError ? 'Back to Login' : 'Sign In Now' }}
+      </button>
+    </div>
+  </div>
+</div>

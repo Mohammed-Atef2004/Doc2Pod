@@ -1,0 +1,107 @@
+<div class="library-wrapper">
+  <!-- Header -->
+  <div class="library-header">
+    <div class="title-section">
+      <span class="subtitle">Personal Collection</span>
+      <h2>Your Podcast Library</h2>
+    </div>
+    <button routerLink="/upload" class="btn-add">
+      <span class="plus-icon">+</span> New Podcast
+    </button>
+  </div>
+
+
+  <div class="control-bar-premium">
+    <!-- Search -->
+    <div class="control-group search-box">
+      <label>Search:</label>
+      <input type="text" placeholder="Podcast name..." [(ngModel)]="searchTerm" (keyup.enter)="searchPodcasts()">
+      <button class="btn-search" (click)="searchPodcasts()">Search</button>
+    </div>
+
+    <div class="control-divider"></div>
+
+
+    <div class="control-group">
+      <label>Show:</label>
+      <div class="btn-toggle-group">
+        <button [class.active]="pageSize === 3" (click)="updatePageSize(3)">3</button>
+        <button [class.active]="pageSize === 5" (click)="updatePageSize(5)">5</button>
+        <button [class.active]="pageSize === 10" (click)="updatePageSize(10)">10</button>
+      </div>
+    </div>
+
+    <div class="control-divider"></div>
+
+    <div class="control-group">
+      <label>Sort:</label>
+      <div class="btn-toggle-group">
+        <button [class.active]="sortDirection === 'desc'" (click)="updateSort('desc')">Newest</button>
+        <button [class.active]="sortDirection === 'asc'" (click)="updateSort('asc')">Oldest</button>
+      </div>
+    </div>
+
+    <div class="control-divider"></div>
+
+    <!-- Pagination -->
+    <div class="control-group">
+      <button class="btn-nav-mini" [disabled]="currentPage === 1" (click)="loadUserPodcasts(currentPage - 1)">←</button>
+      <span class="page-info">Page <b>{{ currentPage }}</b> of {{ totalPages || 1 }}</span>
+      <button class="btn-nav-mini" [disabled]="currentPage === totalPages || totalPages === 0" (click)="loadUserPodcasts(currentPage + 1)">→</button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-overlay">
+    <p>Loading Podcasts...</p>
+  </div>
+
+  <div class="podcast-grid" *ngIf="!isLoading && podcasts.length > 0">
+    <div *ngFor="let podcast of podcasts; trackBy: trackByPodcastId" class="podcast-card-premium" [routerLink]="['/display', podcast.podcastId]">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="card-top">
+          <span class="date">{{ podcast.createdAt | date:'medium' }}</span>
+          <span class="tag">
+            <ng-container [ngSwitch]="podcast.mode">
+              <span *ngSwitchCase="1">Query</span>
+              <span *ngSwitchCase="2">Page Range</span>
+              <span *ngSwitchCase="3">Full</span>
+            </ng-container>
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="mic-icon-mini">
+            <ng-container [ngSwitch]="podcast.mode">
+              <span *ngSwitchCase="1">❓</span>  <span *ngSwitchCase="2">🎙️</span>  <span *ngSwitchCase="3">📚</span>  </ng-container>
+          </div>
+          
+          <div class="text">
+            <h3>{{ podcast.podcastName }}</h3>
+            
+            <ng-container [ngSwitch]="podcast.mode">
+              
+              <p *ngSwitchCase="1" class="mode-details">
+                <b>Q:</b> {{ podcast.topic || 'Custom Question' }}
+              </p>
+              
+              <p *ngSwitchCase="2" class="mode-details">
+                <span class="pages-badge">Pages: {{ podcast.startPage }} - {{ podcast.endPage }}</span>
+                <span *ngIf="podcast.topic" class="page-query">| <b>Q:</b> {{ podcast.topic }}</span>
+              </p>
+              
+              <p *ngSwitchCase="3" class="mode-details">
+                Full Document Summary
+              </p>
+              
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && podcasts.length === 0" class="empty-state">
+    <div class="empty-icon">📭</div>
+    <p>No podcasts found.</p>
+  </div>
+</div>

@@ -1,0 +1,220 @@
+.library-wrapper {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+/* Header */
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 20px;
+}
+.subtitle {
+  color: #fbbf24;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+.library-header h2 {
+  margin: 5px 0 0;
+  font-size: 2.5rem;
+  color: white;
+}
+/* Control Bar */
+.control-bar-premium {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 12px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.control-group label {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+.search-box input {
+  min-width: 180px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  outline: none;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+.search-box input::placeholder { color: rgba(255, 255, 255, 0.35); }
+.search-box input:focus {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.12);
+}
+.btn-search {
+  flex-shrink: 0;
+  background: #fbbf24;
+  color: black;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-search:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
+}
+
+.btn-toggle-group {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px;
+  border-radius: 12px;
+}
+.btn-toggle-group button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 6px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.btn-toggle-group button.active {
+  background: #fbbf24;
+  color: black;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+.control-divider {
+  width: 1px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-nav-mini {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-nav-mini:hover:not(:disabled) {
+  background: #fbbf24;
+  color: black;
+}
+.btn-nav-mini:disabled {
+  opacity: 0.1;
+  cursor: not-allowed;
+}
+.page-info {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+.page-info b { color: #fbbf24; }
+
+.btn-add {
+  background: #fbbf24;
+  color: black;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+}
+.btn-add:hover { transform: scale(1.05); }
+/* Cards */
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+.podcast-card-premium {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 28px;
+  padding: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.podcast-card-premium:hover {
+  transform: translateY(-10px);
+  border-color: rgba(251,191,36,0.5);
+}
+.card-content { padding: 25px; }
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.date {
+  color: #888;
+  font-size: 0.8rem;
+}
+.tag {
+  background: rgba(251,191,36,0.1);
+  color: #fbbf24;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.card-body {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+.mic-icon-mini {
+  font-size: 1.8rem;
+  background: #111;
+  padding: 10px;
+  border-radius: 15px;
+}
+.text h3 { margin: 0; color: white; }
+.text p { color: #888; }
+.empty-state, .loading-overlay {
+  text-align: center;
+  padding: 40px;
+  color: #fbbf24;
+  font-weight: bold;
+}

@@ -1,0 +1,61 @@
+<div class="library-wrapper">
+  <!-- Header -->
+  <div class="library-header">
+    <div class="title-section">
+      <span class="subtitle">Personal Collection</span>
+      <h2>Your Documents</h2>
+    </div>
+  </div>
+  <div class="control-bar-premium">
+    <div class="control-group search-box">
+      <label>Search:</label>
+      <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" (input)="onSearch()">
+    </div>
+    <div class="control-divider"></div>
+    <div class="control-group">
+      <label>Show:</label>
+      <div class="btn-toggle-group">
+        <button [class.active]="pageSize === 5" (click)="updatePageSize(5)">5</button>
+        <button [class.active]="pageSize === 10" (click)="updatePageSize(10)">10</button>
+        <button [class.active]="pageSize === 20" (click)="updatePageSize(20)">20</button>
+      </div>
+    </div>
+    <div class="control-divider"></div>
+    <div class="control-group">
+      <label>Sort:</label>
+      <div class="btn-toggle-group">
+        <button [class.active]="sortDirection === 'desc'" (click)="updateSort('desc')">Newest</button>
+        <button [class.active]="sortDirection === 'asc'" (click)="updateSort('asc')">Oldest</button>
+      </div>
+    </div>
+    <div class="control-divider"></div>
+    <div class="control-group">
+      <button class="btn-nav-mini" [disabled]="currentPage === 1" (click)="loadDocuments(currentPage - 1)">←</button>
+      <span class="page-info">Page {{ currentPage }} / {{ totalPages }}</span>
+      <button class="btn-nav-mini" [disabled]="currentPage >= totalPages" (click)="loadDocuments(currentPage + 1)">→</button>
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="loading-overlay">
+    <p>Loading Documents...</p>
+  </div>
+  <div class="podcast-grid" *ngIf="!isLoading && documents.length > 0">
+    <div *ngFor="let doc of documents" class="podcast-card-premium" (click)="selectDocument(doc)">
+      <div class="card-content">
+        <div class="card-top">
+          <span class="date">{{ doc.createdAt | date:'medium' }}</span>
+          <span class="tag">PDF</span>
+        </div>
+        <div class="card-body">
+          <div class="mic-icon-mini">📄</div>
+          <div class="text">
+            <h3>{{ doc.documentName }}</h3>
+            <p>Click to continue</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isLoading && documents.length === 0" class="empty-state">
+    <p>No documents found.</p>
+  </div>
+</div>
