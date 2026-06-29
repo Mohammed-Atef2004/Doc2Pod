@@ -1,0 +1,322 @@
+[MY-APP] [15:04:50 INF] Hangfire.SqlServer.SqlServerObjectsInstaller - Start installing Hangfire SQL objects...
+[MY-APP] [15:05:00 WRN] Hangfire.SqlServer.SqlServerObjectsInstaller - An exception occurred while trying to perform the migration. Retrying...
+Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "Doc2Pod" requested by the login. The login failed.
+Login failed for user 'DESKTOP-32SJBCS\Mohammed'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open(SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Hangfire.SqlServer.SqlServerStorage.CreateAndOpenConnection() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 406
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection[TContext,TResult](DbConnection dedicatedConnection, Func`4 func, TContext context) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 291
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection(DbConnection dedicatedConnection, Action`2 action) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 268
+   at Hangfire.SqlServer.SqlServerStorage.Initialize() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 465
+ClientConnectionId:f8caa7c9-eda7-460f-9fad-c23672b4c61e
+Error Number:4060,State:1,Class:11
+[MY-APP] [15:05:01 WRN] Hangfire.SqlServer.SqlServerObjectsInstaller - An exception occurred while trying to perform the migration. Retrying...
+Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "Doc2Pod" requested by the login. The login failed.
+Login failed for user 'DESKTOP-32SJBCS\Mohammed'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open(SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Hangfire.SqlServer.SqlServerStorage.CreateAndOpenConnection() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 406
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection[TContext,TResult](DbConnection dedicatedConnection, Func`4 func, TContext context) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 291
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection(DbConnection dedicatedConnection, Action`2 action) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 268
+   at Hangfire.SqlServer.SqlServerStorage.Initialize() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 465
+ClientConnectionId:f8caa7c9-eda7-460f-9fad-c23672b4c61e
+Error Number:4060,State:1,Class:11
+[MY-APP] [15:05:01 WRN] Hangfire.SqlServer.SqlServerObjectsInstaller - An exception occurred while trying to perform the migration.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "Doc2Pod" requested by the login. The login failed.
+Login failed for user 'DESKTOP-32SJBCS\Mohammed'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open(SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Hangfire.SqlServer.SqlServerStorage.CreateAndOpenConnection() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 406
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection[TContext,TResult](DbConnection dedicatedConnection, Func`4 func, TContext context) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 291
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection(DbConnection dedicatedConnection, Action`2 action) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 268
+   at Hangfire.SqlServer.SqlServerStorage.Initialize() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 465
+ClientConnectionId:f8caa7c9-eda7-460f-9fad-c23672b4c61e
+Error Number:4060,State:1,Class:11
+[MY-APP] [15:05:01 WRN] Hangfire.SqlServer.SqlServerObjectsInstaller - Was unable to perform the Hangfire schema migration due to an exception. Ignore this message unless you've just installed or upgraded Hangfire.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "Doc2Pod" requested by the login. The login failed.
+Login failed for user 'DESKTOP-32SJBCS\Mohammed'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open(SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Hangfire.SqlServer.SqlServerStorage.CreateAndOpenConnection() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 406
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection[TContext,TResult](DbConnection dedicatedConnection, Func`4 func, TContext context) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 291
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection(DbConnection dedicatedConnection, Action`2 action) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 268
+   at Hangfire.SqlServer.SqlServerStorage.Initialize() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 465
+ClientConnectionId:f8caa7c9-eda7-460f-9fad-c23672b4c61e
+Error Number:4060,State:1,Class:11
+[MY-APP] [15:05:01 ERR] Hangfire.SqlServer.SqlServerStorage - Was unable to use the TryAutoDetectSchemaDependentOptions option due to an exception.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "Doc2Pod" requested by the login. The login failed.
+Login failed for user 'DESKTOP-32SJBCS\Mohammed'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open(SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.Open()
+   at Hangfire.SqlServer.SqlServerStorage.CreateAndOpenConnection() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 406
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection[TContext,TResult](DbConnection dedicatedConnection, Func`4 func, TContext context) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 291
+   at Hangfire.SqlServer.SqlServerStorage.UseConnection[TResult](DbConnection dedicatedConnection, Func`3 action) in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 279
+   at Hangfire.SqlServer.SqlServerStorage.Initialize() in C:\projects\hangfire-525\src\Hangfire.SqlServer\SqlServerStorage.cs:line 495
+ClientConnectionId:f8caa7c9-eda7-460f-9fad-c23672b4c61e
+Error Number:4060,State:1,Class:11
+[MY-APP] [15:05:02 INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager - User profile is available. Using 'C:\Users\moham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[MY-APP] [15:05:04 INF] Microsoft.Hosting.Lifetime - Now listening on: https://localhost:7163
+[MY-APP] [15:05:04 INF] Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5022
+[MY-APP] [15:05:05 INF] Hangfire.BackgroundJobServer - Starting Hangfire Server using job storage: 'SQL Server: .@Doc2Pod'
+[MY-APP] [15:05:06 INF] Hangfire.BackgroundJobServer - Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+[MY-APP] [15:05:06 INF] Hangfire.BackgroundJobServer - Using the following options for Hangfire Server:
+    Worker count: 1
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[MY-APP] [15:05:06 INF] Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+[MY-APP] [15:05:06 INF] Microsoft.Hosting.Lifetime - Hosting environment: Development
+[MY-APP] [15:05:06 INF] Microsoft.Hosting.Lifetime - Content root path: D:\visual-studio-programs\Doc2Pod-Backend\API
+[MY-APP] [15:05:16 INF] Hangfire.SqlServer.SqlServerObjectsInstaller - Start installing Hangfire SQL objects...
+[MY-APP] [15:05:27 INF] Hangfire.SqlServer.SqlServerObjectsInstaller - Hangfire SQL objects installed.
+[MY-APP] [15:05:27 INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager - User profile is available. Using 'C:\Users\moham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[MY-APP] [15:05:27 INF] Microsoft.Hosting.Lifetime - Now listening on: https://localhost:7163
+[MY-APP] [15:05:27 INF] Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5022
+[MY-APP] [15:05:28 INF] Hangfire.BackgroundJobServer - Starting Hangfire Server using job storage: 'SQL Server: .@Doc2Pod'
+[MY-APP] [15:05:28 INF] Hangfire.BackgroundJobServer - Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+[MY-APP] [15:05:28 INF] Hangfire.BackgroundJobServer - Using the following options for Hangfire Server:
+    Worker count: 1
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[MY-APP] [15:05:28 INF] Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+[MY-APP] [15:05:28 INF] Microsoft.Hosting.Lifetime - Hosting environment: Development
+[MY-APP] [15:05:28 INF] Microsoft.Hosting.Lifetime - Content root path: D:\visual-studio-programs\Doc2Pod-Backend\API
+[MY-APP] [15:05:28 INF] Hangfire.Server.BackgroundServerProcess - Server desktop-32sjbcs:15740:69cc0536 successfully announced in 185.8471 ms
+[MY-APP] [15:05:28 INF] Hangfire.Server.BackgroundServerProcess - Server desktop-32sjbcs:15740:69cc0536 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+[MY-APP] [15:05:28 INF] Hangfire.Server.BackgroundServerProcess - Server desktop-32sjbcs:15740:69cc0536 all the dispatchers started
+[MY-APP] [15:05:28 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/swagger/index.html - null null
+[MY-APP] [15:05:29 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/swagger/index.html - 200 null text/html;charset=utf-8 292.1168ms
+[MY-APP] [15:05:29 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/_framework/aspnetcore-browser-refresh.js - null null
+[MY-APP] [15:05:29 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/_framework/aspnetcore-browser-refresh.js - 200 16491 application/javascript; charset=utf-8 12.8728ms
+[MY-APP] [15:05:29 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/_vs/browserLink - null null
+[MY-APP] [15:05:29 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/_vs/browserLink - 200 null text/javascript; charset=UTF-8 60.9969ms
+[MY-APP] [15:05:31 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/swagger/v1/swagger.json - null null
+[MY-APP] [15:05:31 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 46.8056ms
+[MY-APP] [15:07:56 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - null null
+[MY-APP] [15:07:56 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - 204 null null 15.896ms
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:7163/api/authentication/register - application/json 132
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Register", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Application.Features.Users.Commands.Authentication.Register.RegisterUserCommand, System.Threading.CancellationToken) on controller API.Controllers.AuthenticationController (API).
+[MY-APP] [15:07:57 WRN] LuckyPennySoftware.MediatR.License - You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action API.Controllers.AuthenticationController.Register (API) in 109.4501ms
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:07:57 ERR] WebApi.Middlewares.ExceptionHandlingMiddleware - An unhandled exception has occurred: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+FluentValidation.ValidationException: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\Application\Common\Behaviors\ValidatoinBehavior.cs:line 38
+   at API.Controllers.AuthenticationController.Register(RegisterUserCommand command, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\API\Controllers\AuthenticationController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.Middlewares.BlacklistMiddleware.InvokeAsync(HttpContext context, ITokenBlacklistService blacklist) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\BlacklistMiddleware.cs:line 44
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WebApi.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\ExceptionHandlingMiddleware.cs:line 22
+[MY-APP] [15:07:57 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:7163/api/authentication/register - 400 null application/json 538.7132ms
+[MY-APP] [15:10:47 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/swagger/index.html - null null
+[MY-APP] [15:10:47 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/swagger/index.html - 200 null text/html;charset=utf-8 16.3828ms
+[MY-APP] [15:10:48 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/_framework/aspnetcore-browser-refresh.js - null null
+[MY-APP] [15:10:48 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/_framework/aspnetcore-browser-refresh.js - 200 16491 application/javascript; charset=utf-8 4.6133ms
+[MY-APP] [15:10:48 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/_vs/browserLink - null null
+[MY-APP] [15:10:48 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/_vs/browserLink - 200 null text/javascript; charset=UTF-8 12.2501ms
+[MY-APP] [15:10:54 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/swagger/v1/swagger.json - null null
+[MY-APP] [15:10:54 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 79.5976ms
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - null null
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - 204 null null 11.2079ms
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:7163/api/authentication/register - application/json 132
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Register", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Application.Features.Users.Commands.Authentication.Register.RegisterUserCommand, System.Threading.CancellationToken) on controller API.Controllers.AuthenticationController (API).
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action API.Controllers.AuthenticationController.Register (API) in 8.9979ms
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:12:10 ERR] WebApi.Middlewares.ExceptionHandlingMiddleware - An unhandled exception has occurred: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+FluentValidation.ValidationException: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\Application\Common\Behaviors\ValidatoinBehavior.cs:line 38
+   at API.Controllers.AuthenticationController.Register(RegisterUserCommand command, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\API\Controllers\AuthenticationController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.Middlewares.BlacklistMiddleware.InvokeAsync(HttpContext context, ITokenBlacklistService blacklist) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\BlacklistMiddleware.cs:line 44
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WebApi.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\ExceptionHandlingMiddleware.cs:line 22
+[MY-APP] [15:12:10 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:7163/api/authentication/register - 400 null application/json 63.2147ms
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:7163/api/authentication/register - application/json 132
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Register", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Application.Features.Users.Commands.Authentication.Register.RegisterUserCommand, System.Threading.CancellationToken) on controller API.Controllers.AuthenticationController (API).
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action API.Controllers.AuthenticationController.Register (API) in 2.0484ms
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:12:15 ERR] WebApi.Middlewares.ExceptionHandlingMiddleware - An unhandled exception has occurred: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+FluentValidation.ValidationException: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\Application\Common\Behaviors\ValidatoinBehavior.cs:line 38
+   at API.Controllers.AuthenticationController.Register(RegisterUserCommand command, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\API\Controllers\AuthenticationController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.Middlewares.BlacklistMiddleware.InvokeAsync(HttpContext context, ITokenBlacklistService blacklist) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\BlacklistMiddleware.cs:line 44
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WebApi.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\ExceptionHandlingMiddleware.cs:line 22
+[MY-APP] [15:12:15 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:7163/api/authentication/register - 400 null application/json 58.214ms
+[MY-APP] [15:14:08 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/swagger/index.html - null null
+[MY-APP] [15:14:08 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/swagger/index.html - 200 null text/html;charset=utf-8 19.7107ms
+[MY-APP] [15:14:08 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/_framework/aspnetcore-browser-refresh.js - null null
+[MY-APP] [15:14:08 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/_framework/aspnetcore-browser-refresh.js - 200 16491 application/javascript; charset=utf-8 3.0292ms
+[MY-APP] [15:14:08 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/_vs/browserLink - null null
+[MY-APP] [15:14:08 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.8139ms
+[MY-APP] [15:14:10 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:7163/swagger/v1/swagger.json - null null
+[MY-APP] [15:14:10 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:7163/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.0863ms
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - null null
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - 204 null null 11.4898ms
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:7163/api/authentication/register - application/json 132
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Register", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Application.Features.Users.Commands.Authentication.Register.RegisterUserCommand, System.Threading.CancellationToken) on controller API.Controllers.AuthenticationController (API).
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action API.Controllers.AuthenticationController.Register (API) in 1.2413ms
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:14:58 ERR] WebApi.Middlewares.ExceptionHandlingMiddleware - An unhandled exception has occurred: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+FluentValidation.ValidationException: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\Application\Common\Behaviors\ValidatoinBehavior.cs:line 38
+   at API.Controllers.AuthenticationController.Register(RegisterUserCommand command, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\API\Controllers\AuthenticationController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.Middlewares.BlacklistMiddleware.InvokeAsync(HttpContext context, ITokenBlacklistService blacklist) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\BlacklistMiddleware.cs:line 44
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WebApi.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\ExceptionHandlingMiddleware.cs:line 22
+[MY-APP] [15:14:58 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:7163/api/authentication/register - 400 null application/json 63.4146ms
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - null null
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 OPTIONS https://localhost:7163/api/authentication/register - 204 null null 10.9181ms
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:7163/api/authentication/register - application/json 132
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Cors.Infrastructure.CorsService - CORS policy execution successful.
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Register", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Application.Features.Users.Commands.Authentication.Register.RegisterUserCommand, System.Threading.CancellationToken) on controller API.Controllers.AuthenticationController (API).
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action API.Controllers.AuthenticationController.Register (API) in 1.5203ms
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'API.Controllers.AuthenticationController.Register (API)'
+[MY-APP] [15:15:19 ERR] WebApi.Middlewares.ExceptionHandlingMiddleware - An unhandled exception has occurred: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+FluentValidation.ValidationException: Validation failed: 
+ -- Password: Password must contain at least one special character (!?*.). Severity: Error
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\Application\Common\Behaviors\ValidatoinBehavior.cs:line 38
+   at API.Controllers.AuthenticationController.Register(RegisterUserCommand command, CancellationToken cancellationToken) in D:\visual-studio-programs\Doc2Pod-Backend\API\Controllers\AuthenticationController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.Middlewares.BlacklistMiddleware.InvokeAsync(HttpContext context, ITokenBlacklistService blacklist) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\BlacklistMiddleware.cs:line 44
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WebApi.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in D:\visual-studio-programs\Doc2Pod-Backend\API\Middleware\ExceptionHandlingMiddleware.cs:line 22
+[MY-APP] [15:15:19 INF] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:7163/api/authentication/register - 400 null application/json 47.6735ms
