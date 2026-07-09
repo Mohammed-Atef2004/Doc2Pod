@@ -1,0 +1,203 @@
+<div class="profile-page-wrapper" *ngIf="userData">
+  
+  <div class="profile-flex-container">
+    
+    <div class="profile-left-aside">
+      <div class="avatar-circle-luxury">
+        <div class="avatar-shimmer"></div>
+        <div class="avatar-text">
+          {{ userData.firstname?.[0] }}{{ userData.lastname?.[0] }}
+        </div>
+      </div>
+      <div class="user-info-stack">
+        <h1 class="user-name-title">{{ userData.firstname }} {{ userData.lastname }}</h1>
+      </div>
+    </div>
+
+    <div class="profile-right-content">
+      
+      <div class="profile-card">
+        <div class="card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-user gold-icon"></i>
+            <h3>Personal Information</h3>
+          </div>
+          <button class="edit-btn-icon" (click)="isEditingName ? saveName() : toggleEditName()">
+            <i class="fa-solid" 
+               [ngClass]="isEditingName ? 'fa-check gold-icon-btn' : 'fa-pen-to-square gold-icon-btn'">
+            </i>
+          </button>
+        </div>
+
+        <div class="card-body">
+          <div class="info-row">
+            <label>First Name</label>
+            <span *ngIf="!isEditingName" class="val">{{ userData.firstname }}</span>
+            <input *ngIf="isEditingName" type="text" [(ngModel)]="tempName.firstName" class="edit-mode-input">
+          </div>
+
+          <div class="info-row">
+            <label>Last Name</label>
+            <span *ngIf="!isEditingName" class="val">{{ userData.lastname }}</span>
+            <input *ngIf="isEditingName" type="text" [(ngModel)]="tempName.lastName" class="edit-mode-input">
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-address-book gold-icon"></i>
+            <h3>Contact Information</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-row">
+            <label><i class="fa-solid fa-envelope gold-icon-sm"></i> Email</label>
+            <div class="row-content-action">
+              <span class="val">{{ userData.email }}</span>
+              <button class="edit-btn-icon-sm" (click)="openSecurityCheck('email')">
+                <i class="fa-solid fa-pen-to-square gold-icon-btn"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <label><i class="fa-solid fa-phone gold-icon-sm"></i> Phone Number</label>
+            <div class="phone-action-area">
+              <div *ngIf="userData?.phoneNumber" class="row-content-action">
+                <span class="val phone-text">{{ userData.phoneNumber }}</span>
+                <button class="edit-btn-icon-sm" (click)="openSecurityCheck('phone')">
+                  <i class="fa-solid fa-pen-to-square gold-icon-btn"></i>
+                </button>
+              </div>
+
+              <button *ngIf="!userData?.phoneNumber" 
+                      class="btn-set-phone" 
+                      (click)="openSecurityCheck('phone')"> 
+                Set Phone Number
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-lock gold-icon"></i>
+            <h3>Security</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="desc-text">Update your password regularly to keep your account secure.</p>
+          <button class="btn-outline-white-luxury" (click)="openSecurityCheck('password')">
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-shield-halved gold-icon"></i>
+            <h3>Two-Factor Authentication (2FA)</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="desc-text">Protect your account with an extra layer of security.</p>
+          
+          <button 
+            [class]="userData?.isTwoFactorEnabled ? 'btn-disable-action' : 'btn-gold-action'" 
+            (click)="handle2FAAction()"
+            [disabled]="isLoading">
+            
+            <span *ngIf="!isLoading">
+              {{ userData?.isTwoFactorEnabled ? 'Disable 2FA' : 'Setup 2FA' }}
+            </span>
+            
+            <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="security-overlay" *ngIf="isSettingUp2FA">
+  <div class="verify-card">
+    <div class="modal-header-row">
+      <h3 class="gold-title">Two-Factor Authentication</h3>
+      <button class="close-x-inline" (click)="isSettingUp2FA = false">×</button>
+    </div>
+    <p class="subtitle">Scan the QR code to secure your account</p>
+
+    <div class="qr-container" *ngIf="twoFactorSetupData">
+      <div class="qr-frame">
+        <qrcode 
+          [qrdata]="twoFactorSetupData.qrCodeUri" 
+          [width]="180" 
+          [errorCorrectionLevel]="'M'"
+          [colorDark]="'#000000'"
+          [colorLight]="'#ffffff'">
+        </qrcode>
+      </div>
+
+      <div class="manual-entry">
+        <span class="manual-label">Can't scan? Use this key:</span>
+        <div class="secret-box" (click)="copySecret(twoFactorSetupData.secret)">
+          <code>{{ twoFactorSetupData.secret }}</code>
+          <i class="fa-regular fa-copy"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="form-group">
+      <input type="text" 
+            name="otpCode"
+            [(ngModel)]="totpConfirmationCode" 
+            #otpInput="ngModel"
+            placeholder="" 
+            maxlength="6"
+            required
+            pattern="^[0-9]{6}$"
+            class="luxury-input otp-field"
+            (keypress)="onlyNumbers($event)"
+            (input)="onOtpChange()"
+            [class.input-error]="otpInput.invalid && (otpInput.dirty || otpInput.touched)">
+
+      <small class="error-msg" *ngIf="otpInput.errors?.['required'] && otpInput.touched">
+        <i class="fa-solid fa-circle-info"></i> Code is required
+      </small>
+
+      <small class="error-msg" *ngIf="otpInput.errors?.['pattern'] && otpInput.dirty">
+        <i class="fa-solid fa-circle-info"></i> Must be 6 digits
+      </small>
+
+      <div class="server-error-box" *ngIf="serverError">
+        <i class="fa-solid fa-circle-exclamation"></i> {{ serverError }}
+      </div>
+    </div>
+
+    
+    <button class="btn-gold-action" 
+            [disabled]="isLoading || otpInput.invalid"
+            (click)="confirm2FA()">
+      <span *ngIf="!isLoading">Enable 2FA Now</span>
+      <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i>
+    </button>
+
+  </div>
+</div>
+<app-security-verify 
+  *ngIf="showSecurityModal" 
+  [mode]="securityMode"
+  [is2FAEnabled]="userData?.isTwoFactorEnabled"
+  [failedAttempts]="userData?.failedLoginAttempts"
+  (onClose)="showSecurityModal = false"
+  (onSuccess)="handleSecuritySuccess()">
+</app-security-verify>

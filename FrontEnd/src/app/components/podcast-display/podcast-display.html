@@ -1,0 +1,85 @@
+<div class="glass-display-container">
+  <audio #audioPlayer
+      preload="metadata"
+      (loadedmetadata)="onMetadataLoaded()" 
+      (timeupdate)="updateProgress()"
+      (ended)="onAudioEnded()">
+  </audio>
+  <div class="glass-player-card">
+    
+    <div class="player-header">
+      <button class="back-pill" routerLink="/podcasts">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </button>
+    </div>
+
+    <div class="player-body" *ngIf="podcast">
+      <div class="art-frame">
+        <div class="mic-glow-icon">🎙️</div>
+      </div>
+      
+      <div class="track-info">
+        <span class="voice-badge">Egyptian AI Voice</span>
+        <h1>{{ podcast.podcastName }}</h1>
+        <p class="author">Generated via RAG System</p>
+        
+        <div class="description-zone">
+          <ng-container [ngSwitch]="podcast.mode">
+            
+            <p *ngSwitchCase="1" class="description">
+              <b>Question:</b> {{ podcast.topic || 'Custom Question Answered' }}
+            </p>
+            
+            <p *ngSwitchCase="2" class="description">
+              <span class="pages-badge-player">Pages: {{ podcast.startPage }} - {{ podcast.endPage }}</span>
+              <span *ngIf="podcast.topic" class="page-query-player"><br><b>Question:</b> {{ podcast.topic }}</span>
+            </p>
+            
+            <p *ngSwitchCase="3" class="description">
+              {{ podcast.topic || 'Full Document Summary' }}
+            </p>
+            
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="visualizer-section">
+      <p class="section-label">AUDIO VISUALIZER</p>
+      <div class="bars-container" [class.playing]="isPlaying">
+        <span class="dot"></span><span class="dot"></span>
+        <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar active"></span>
+        <span class="v-bar"></span><span class="v-bar"></span>
+        <span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="progress-container">
+      <span class="time">{{ currentTime }}</span>
+      <div class="seek-bar" (click)="seek($event)" #seekBar>
+        <div class="fill" [style.width.%]="progress"></div>
+        <div class="knob" [style.left.%]="progress"></div>
+      </div>
+      <span class="time">{{ duration }}</span>
+    </div>
+
+    <div class="playback-controls">
+      <button class="ctrl-btn" (click)="skip(-10)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+      </button>
+      
+      <button class="main-play-btn" (click)="togglePlay()">
+        <svg *ngIf="!isPlaying" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg *ngIf="isPlaying" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+
+      <button class="ctrl-btn" (click)="skip(10)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 6v12l8.5-6L13 6zM4 18l8.5-6L4 6v12z"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>

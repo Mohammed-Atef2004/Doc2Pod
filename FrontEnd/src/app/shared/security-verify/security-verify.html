@@ -1,0 +1,70 @@
+<div class="security-overlay">
+  <div class="verify-card">
+    <button class="close-x" (click)="onClose.emit()">×</button>
+    
+    <h3 class="gold-title">{{ mode | titlecase }} Security</h3>
+    <p class="subtitle" *ngIf="failedAttempts < 3">Enter your details to confirm the update</p>
+    
+    <div class="attempt-warning" *ngIf="failedAttempts >= 3 && failedAttempts < 5">
+      <i class="fa-solid fa-triangle-exclamation"></i> Careful! {{ 5 - failedAttempts }} attempts left before lockout.
+    </div>
+
+    <form [formGroup]="securityForm" (ngSubmit)="submit()">
+      
+      <div class="form-group">
+        <input type="password" formControlName="currentPassword" 
+               placeholder="Current Password" class="luxury-input"
+               [class.input-error]="securityForm.get('currentPassword')?.invalid && securityForm.get('currentPassword')?.touched">
+        
+        <div class="error-container" *ngIf="securityForm.get('currentPassword')?.invalid && securityForm.get('currentPassword')?.touched">
+          <small class="error-msg" *ngIf="securityForm.get('currentPassword')?.errors?.['required']">This field is required.</small>
+          <small class="error-msg" *ngIf="securityForm.get('currentPassword')?.errors?.['minlength']">Min 8 characters required.</small>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+    <div class="form-group" *ngIf="is2FAEnabled">
+      <input type="text" 
+            formControlName="otpCode" 
+            maxlength="6" 
+            (keypress)="onlyNumbers($event)"
+            placeholder="6-Digit OTP Code" 
+            class="luxury-input"
+            [class.input-error]="securityForm.get('otpCode')?.invalid && securityForm.get('otpCode')?.touched">
+      
+      <div class="error-container" *ngIf="securityForm.get('otpCode')?.invalid && securityForm.get('otpCode')?.touched">
+        <small class="error-msg" *ngIf="securityForm.get('otpCode')?.errors?.['required']">OTP is required.</small>
+        <small class="error-msg" *ngIf="securityForm.get('otpCode')?.errors?.['pattern']">Must be exactly 6 digits.</small>
+      </div>
+    </div>
+
+      <div class="divider"></div>
+
+      <div class="form-group">
+        <input [type]="mode === 'password' ? 'password' : 'text'" 
+               formControlName="newValue" 
+               [placeholder]="'New ' + (mode | titlecase)" 
+               class="luxury-input"
+               [class.input-error]="securityForm.get('newValue')?.invalid && securityForm.get('newValue')?.touched">
+        
+        <div class="error-container" *ngIf="securityForm.get('newValue')?.invalid && securityForm.get('newValue')?.touched">
+          <small class="error-msg" *ngIf="securityForm.get('newValue')?.errors?.['required']">This field is required.</small>
+          <small class="error-msg" *ngIf="securityForm.get('newValue')?.errors?.['email']">Invalid email format.</small>
+          <small class="error-msg" *ngIf="securityForm.get('newValue')?.errors?.['pattern'] && mode === 'phone'">Format: +20XXXXXXXXXX</small>
+          <small class="error-msg" *ngIf="securityForm.get('newValue')?.errors?.['pattern'] && mode === 'password'">
+             8+ chars, upper, lower, number & symbol.
+          </small>
+        </div>
+      </div>
+
+      <div class="server-error-box" *ngIf="serverError">
+        <i class="fa-solid fa-circle-exclamation"></i> {{ serverError }}
+      </div>
+
+      <button type="submit" class="btn-gold-action" [disabled]="isLoading || (securityForm.invalid && securityForm.touched)">
+        <span *ngIf="!isLoading">Confirm & Save</span>
+        <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i>
+      </button>
+    </form>
+  </div>
+</div>

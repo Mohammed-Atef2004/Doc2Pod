@@ -1,0 +1,21 @@
+<div class="confirm-container">
+  <div class="confirm-card">
+    <div class="icon-wrapper">
+      <div *ngIf="isLoading" class="loader"></div>
+      <span *ngIf="!isLoading && !isError" class="success-icon">✔</span>
+      <span *ngIf="!isLoading && isError" class="error-icon">✖</span>
+    </div>
+
+    <h1 class="status-title">{{ message }}</h1>
+    
+    <p class="status-subtitle" *ngIf="isLoading">
+      Please wait while we verify your credentials...
+    </p>
+
+    <div class="action-area" *ngIf="!isLoading">
+      <button class="btn-primary" (click)="goToLogin()">
+        {{ isError ? 'Try Again' : 'Go to Login' }}
+      </button>
+    </div>
+  </div>
+</div>

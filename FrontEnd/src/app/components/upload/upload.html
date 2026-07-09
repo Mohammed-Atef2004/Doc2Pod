@@ -1,0 +1,119 @@
+<div class="upload-wrapper">
+  <div class="upload-container" [class.is-loading]="isProcessing || isAlreadyRunning">
+
+    <h2>Transform PDF to Podcast</h2>
+    <p class="subtitle">
+      Turn documents into cinematic AI narration
+    </p>
+
+    <div class="status-overlay" *ngIf="isProcessing || isAlreadyRunning">
+      <div class="spinner"></div>
+      <p>Generating your podcast... Please wait</p>
+      <button class="btn-secondary btn-sm" (click)="goToLibrary()">View Library</button>
+    </div>
+
+    <div class="document-section">
+      <label>Selected Document</label>
+
+      <div class="selected-doc" *ngIf="selectedDocumentId">
+        📄 {{ selectedDocumentName }}
+      </div>
+
+      <div class="selected-doc empty" *ngIf="!selectedDocumentId && !selectedFile">
+        No document selected
+      </div>
+
+      <div class="selected-doc" *ngIf="selectedFile">
+        📄 {{ selectedFile.name }}
+      </div>
+
+   
+      <div class="document-actions">
+        <button 
+          class="btn-secondary" 
+          (click)="!(isProcessing || isAlreadyRunning) && fileInput.click()" 
+          [disabled]="isProcessing || isAlreadyRunning"
+          [class.btn-disabled]="isProcessing || isAlreadyRunning">
+          Upload New PDF
+        </button>
+
+        <button 
+          class="btn-secondary" 
+          (click)="!(isProcessing || isAlreadyRunning) && goToDocuments()" 
+          [disabled]="isProcessing || isAlreadyRunning"
+          [class.btn-disabled]="isProcessing || isAlreadyRunning">
+          Choose Existing PDF
+        </button>
+      </div>
+
+      <input 
+        #fileInput 
+        hidden 
+        type="file" 
+        accept=".pdf" 
+        (change)="onFileSelected($event)" />
+    </div>
+
+    <div class="config-section" *ngIf="(selectedFile || selectedDocumentId) && !(isProcessing || isAlreadyRunning)">
+      
+      
+      <div class="config-row">
+        <label>Voice Tone</label>
+        <select [(ngModel)]="selectedVoice">
+          <option value="Friendly Egyptian">Friendly Egyptian</option>
+          <option value="Professional Studio">Professional Studio</option>
+        </select>
+      </div>
+
+      
+      <div class="config-row">
+        <label>Generation Mode</label>
+        <select [(ngModel)]="selectedMode">
+          <option [value]="1">Topic Focus</option>
+          <option [value]="2">Topic + Page Range</option>
+          <option [value]="3">Full Document</option>
+        </select>
+      </div>
+
+      
+      <div class="config-row" *ngIf="selectedMode == 1 || selectedMode == 2">
+        <label>Topic</label>
+        <input 
+          class="text-input" 
+          type="text" 
+          [(ngModel)]="topic" 
+          placeholder="Enter topic..." />
+      </div>
+
+      
+      <div class="pages-row" *ngIf="selectedMode == 2">
+        <input 
+          class="text-input" 
+          type="number" 
+          min="1"
+          [(ngModel)]="startPage" 
+          placeholder="Start Page" />
+        <input 
+          class="text-input" 
+          type="number" 
+          min="1"
+          [(ngModel)]="endPage" 
+          placeholder="End Page" />
+      </div>
+    </div>
+
+    <button 
+      class="btn-primary" 
+      (click)="startTransformation()" 
+      *ngIf="!(isProcessing || isAlreadyRunning)"
+      [disabled]="isProcessing || (!selectedFile && !selectedDocumentId)">
+      Generate Podcast ✨
+    </button>
+
+    <!-- <div class="success-actions" *ngIf="showSuccessActions && !isProcessing && !isAlreadyRunning">
+      <button class="btn-primary" (click)="goToLibrary()">Go to Library 🎧</button>
+      <button class="btn-secondary" (click)="resetUpload()">Create Another</button>
+    </div> -->
+
+  </div>
+</div>

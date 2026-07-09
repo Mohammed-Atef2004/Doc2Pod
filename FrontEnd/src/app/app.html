@@ -1,0 +1,52 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<nav class="navbar">
+  <div class="logo" routerLink="/">Doc2Pod<span>.ai</span></div>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="/upload" routerLinkActive="active">Upload</a>
+    <a routerLink="/podcasts" routerLinkActive="active">Library</a>
+  </div>
+<!-- <div class="auth-btns">
+  <button *ngIf="!isLoggedIn" routerLink="/login" class="login-btn">Sign In</button>
+  <div *ngIf="isLoggedIn" class="user-profile-menu" routerLink="/profile">
+    <div class="icon-box">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="profile-icon-svg">
+        <circle cx="12" cy="8" r="5" />
+        <path d="M20 21a8 8 0 0 0-16 0" />
+      </svg>
+    </div>
+  </div>
+</div> -->
+<div class="auth-btns">
+  <button *ngIf="!isLoggedIn" routerLink="/login" class="login-btn">Sign In</button>
+  
+  <div *ngIf="isLoggedIn" class="profile-capsule-wrapper">
+    <div class="profile-capsule" (click)="toggleDropdown()">
+      <div class="icon-box-capsule">
+        <i class="fa-solid fa-circle-user profile-icon-capsule"></i>
+      </div>
+      <i class="fa-solid fa-chevron-down chevron-icon-capsule" [class.rotate]="isDropdownOpen"></i>
+    </div>
+
+    <div class="dropdown-menu" *ngIf="isDropdownOpen">
+      <div class="user-info">
+        <span class="user-name">{{ userFullName }}</span>
+      </div>
+      <hr class="dropdown-divider">
+      <a routerLink="/profile" (click)="isDropdownOpen = false">
+        <i class="fa-regular fa-user"></i> My Profile
+      </a>
+      <a (click)="onLogout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+      </a>
+    </div>
+  </div>
+</div>
+</nav>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
