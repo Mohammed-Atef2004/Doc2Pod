@@ -8,18 +8,18 @@ This repository is structured as a **Monorepo**, housing three decoupled microse
 ## 🚀 System Architecture & Microservices
 
 ### 1. 🖥️ Frontend (Angular SPA)
-* **Path:** `/frontend`
+* **Path:** `/FrontEnd`
 * **Tech Stack:** Angular, TypeScript, HTML/SCSS, Bootstrap
 * **Description:** A highly responsive Single Page Application (SPA) providing role-based dashboards for Students and Instructors. Users can upload course materials, manage episodes, and play generated podcasts directly in the browser.
 
 ### 2. ⚙️ Backend (ASP.NET Core API)
-* **Path:** `/backend`
+* **Path:** `/Backend`
 * **Tech Stack:** C#, ASP.NET Core, Entity Framework Core (SQL Server), JWT
 * **Architecture:** Built using **Clean Architecture** and **CQRS** (via MediatR) alongside Domain-Driven Design (DDD) principles.
 * **Description:** Handles secure user authentication, SMTP email onboarding, role-based access control, and the core relational database logic for managing Courses, Users, and Episodes.
 
 ### 3. 🧠 AI Services & Inference Engine (FastAPI & Colab)
-* **Path:** `/ai-services` (Jupyter Notebooks & Python Scripts)
+* **Path:** `/ExternalServices` (Jupyter Notebooks & Python Scripts)
 * **Tech Stack:** Python, FastAPI, PyTorch, Hugging Face, Supabase, Cloudflare Tunnels
 * **Description:** The heavy-lifting GPU pipeline. It exposes a thread-safe FastAPI endpoint via Cloudflare Tunnels to communicate with the C# backend. 
   * **Visual Understanding:** Uses **PaddleOCR** and **Qwen3-VL** to extract text, tables, and describe complex diagrams.
@@ -42,19 +42,19 @@ This repository is structured as a **Monorepo**, housing three decoupled microse
 Because of the decoupled nature of this project, each service must be started independently.
 
 ### Starting the AI Server (Colab/GPU)
-1. Open the `/ai-services/Doc2Pod_With_TTS_Final.ipynb` notebook in Google Colab.
+1. Open the `/ExternalServices/Copy_of_Doc2Pod_With_TTS_Final` notebook in Google Colab.
 2. Add your `SUPABASE_URL` and `SUPABASE_KEY` to Colab Secrets.
 3. Run all cells. The final cell will generate a **Cloudflare Tunnel URL** (e.g., `https://random-words.trycloudflare.com`).
 4. Copy this URL to configure the Backend connection.
 
 ### Starting the Backend (C# ASP.NET)
-1. Navigate to the `/backend` directory.
+1. Navigate to the `/Backend` directory.
 2. Update `appsettings.json` with your SQL Server connection string and the Cloudflare Tunnel URL from the AI Server.
 3. Run migrations: `dotnet ef database update`
 4. Start the server: `dotnet run`
 
 ### Starting the Frontend (Angular)
-1. Navigate to the `/frontend` directory.
+1. Navigate to the `/FrontEnd` directory.
 2. Install dependencies: `npm install`
 3. Serve the application: `ng serve`
 4. Open `http://localhost:4200` in your browser.
