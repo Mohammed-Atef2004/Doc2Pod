@@ -49,6 +49,10 @@ Triggers the heavy extraction and generation pipeline. The server uses a global 
 }
 Returns: {"task_id": "uuid-string"}
 ```
-GET /status/{task_id}
+### `GET /status/{task_id}`
 A polling endpoint for the backend to check the status of the generation task.
-Returns: {"status": "PROCESSING"} OR {"status": "DONE", "script_path": "...", "audio_path": "..."}
+```json
+Returns: {"status": "PROCESSING"}
+OR
+{"status": "DONE", "script_path": "...", "audio_path": "..."}
+```
