@@ -4,6 +4,10 @@
 Doc2Pod is an end-to-end, AI-powered educational platform that transforms complex academic documents (PDFs, slides, charts, and code snippets) into engaging, multi-speaker conversational podcasts. The generated podcasts utilize code-switching (Egyptian Arabic and Technical English) to make dense Computer Science topics accessible and entertaining.
 
 This repository is structured as a **Monorepo**, housing three decoupled microservices: a web-based Frontend, an Enterprise-grade Backend, and a GPU-accelerated AI Inference Engine.
+---
+
+## 🚀Demo
+https://github.com/user-attachments/assets/3e70a78e-4c64-4a9b-815d-bbce2fd9fcb1
 
 ## 🚀 System Architecture & Microservices
 
